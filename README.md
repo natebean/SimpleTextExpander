@@ -1,5 +1,5 @@
 # Simple Text Expander
-A simple Windows app written in C#.
+A simple Windows app written in C#, expands hotstrings into expanded text.
 
 
 ## Usage
