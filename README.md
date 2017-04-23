@@ -1,38 +1,10 @@
-# KeystrokeAPI
-A simple Keystroke API written in C# that works for any version of Windows. It abstracts the access to the *win32.dll* and the handling of low level hooks (only keyboard for now). 
-
-## Instalation
-```sh
-Install-Package KeystrokeAPI
-```
-## How to use
-
-**1 -** Call the *CreateKeyboardHook()* method passing your callback like this:
-
-```c#
-api.CreateKeyboardHook((character) => { Console.Write(character); });
-```
-**2 -** Implement your own "*Windows Message Loop*" **OR** call this:
-```c#
-Application.Run();
-```
-*NOTE: This call starts the windows message loop for you, but you will need to reference the System.Windows.Forms.dll in your project*. [Click here to know why].
+# Simple Text Expander
+A simple Windows app written in C#.
 
 
-## Example (Using a Console Application) 
-```c#
-class Program
-{
-    static void Main(string[] args)
-    {
-        using (var api = new KeystrokeAPI())
-        {
-            api.CreateKeyboardHook((character) => { Console.Write(character); });
-            Application.Run();
-        }
-    }
-}
-```
+## Usage
+Update the App config file with your hotstrings as keys and the output you want as the value.
+Be sure to reload settings from the icon in the task bar, when making changes to the app config file.
 
-   [Click here to know why]: <http://stackoverflow.com/a/7460728/890890>
-
+## Thanks to
+Keystroke API https://github.com/fabriciorissetto/KeystrokeAPI
