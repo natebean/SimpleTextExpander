@@ -20,12 +20,23 @@ namespace SimpleTextExpander
             api.CreateKeyboardHook((character) => { bool ans = KeyProcessor(character); return ans; });
 
             // Read all the keys from the config file
+            ReadSettings();
+        }
+
+        public void ReadSettings()
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
             hotStrings = ConfigurationManager.AppSettings;
+            Console.Clear();
+            Console.WriteLine("SimpleTextExpander");
             foreach (var key in hotStrings.AllKeys)
             {
                 Console.WriteLine("Key: {0} Value: {1}", key, hotStrings[key]);
             }
             Console.WriteLine("The plus sign(+), caret(^), percent sign(%), tilde(~), and parentheses() have special meanings to SendKeys.To specify one of these characters, enclose it within braces({ }). For example, to specify the plus sign, use \"{+}\"");
+
         }
 
         public bool KeyProcessor(Keystroke.API.CallbackObjects.KeyPressed character)

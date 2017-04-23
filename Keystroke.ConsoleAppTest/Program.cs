@@ -25,19 +25,26 @@ namespace SimpleTextExpander
 public class TheAppContext : ApplicationContext
 {
     private NotifyIcon trayIcon;
+    private KeyHandler ourKeyHandler;
 
     public TheAppContext()
     {
-        KeyHandler ourKeyHandler = new KeyHandler();
+        ourKeyHandler = new KeyHandler();
         // Initialize Tray Icon
         trayIcon = new NotifyIcon()
         {
             Icon = Resources.AppIcon,
             ContextMenu = new ContextMenu(new MenuItem[] {
+                new MenuItem("Reload Settings", ReloadSettings),
                 new MenuItem("Exit", Exit)
             }),
             Visible = true
         };
+    }
+
+    void ReloadSettings(object sender, EventArgs e)
+    {
+        ourKeyHandler.ReadSettings();
     }
 
     void Exit(object sender, EventArgs e)
